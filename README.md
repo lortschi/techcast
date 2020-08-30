@@ -21,6 +21,12 @@
     symfony server:start
 ```
 
+If coincidentally the php error with the "failed to open steam" would pop up in your browser, than please install composer first:
+
+```
+    php composer.phar install
+```
+
 ### Issues that popped up during the development
 - failed to open stream ... no such file or directory ... bootstrap.php"
 
