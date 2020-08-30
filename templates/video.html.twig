@@ -1,4 +1,15 @@
-<h1>Template for a video</h1>
+{% extends "base.html.twig" %}
+{% block body %}
+   <div class="video-container">
+      <div class="video-row">
+         <div class="video-main">
+            <h1>You are watching video: {{videodata.name}}</h1>
+            <video controls crossorigin playsinline id="player">
+               <source src="/videofiles/{{videodata.file}}" type="video/mp4">
+            </video>
+         </div>
+   </div>
+{% endblock %}
 
 {# 
    here you can use the Twig variable 'videodata' that gets passed from the controller. 

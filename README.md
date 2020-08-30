@@ -1,11 +1,19 @@
-# Symfony based HTML video web app
+## Symfony based HTML video web app task
 
-- Objective: Finish the provided application skeleton to create a *responsive* web application based in the Bootstrap 4 framework and Twig templates. Don't be afraid to ask if you are stuck (instead of banging your head against the wall). Sometimes a small hint will get you far. 
+- Task specification: Responsive web application with Bootstrap 4 framework and Symfony Twig templates. The app containes 2 separated view templates: homepage with the list of the latest videos and video detail page with the choosen rendered video.
 
+- After cloning down to local folder the source code please run:
 
--  Required tools / environment: Git command line tool, PHP 7.2.5 or higher, Symfony 5.0.4 (available for Linux, macOS and Windows here https://symfony.com/download), Node.js 10.15.3 or higher, Yarn 1.15.2 or higher
+```
+    yarn
+```
+..to get all node dependencies.
 
-- Clone (not fork) Git repository from https://github.com/TechcastGmbH/video-app.git
+- To build Webpack and the JS / SCSS files please run:
+
+```
+    yarn encore dev
+```
 
 - To access the application start the server on the commandline, then find the application with the address http://localhost:8000
 
@@ -13,26 +21,14 @@
     symfony server:start
 ```
 
-- in case of an error such as "failed to open stream ... no such file or directory ... bootstrap.php" run `composer install` (or `php composer.phar install`) in the application directory
+### Issues that popped up during the development
+- failed to open stream ... no such file or directory ... bootstrap.php"
 
-- You can find some template skeletons in the directory "templates". Please note that Twig templates can use some mechanisms for including/extending other templates such as https://twig.symfony.com/doc/2.x/tags/extends.html. 
+- sass-loader got scss validation errors by building webpack. So after quick remove and adding back the same version: yarn remove sass-loader && yarn add -D sass-loader@7.0.1, it starts to work properly.
 
-- The CSS and JS get built with Yarn, for instance "yarn encore dev) (see https://symfony.com/doc/current/frontend/encore/simple-example.html for more information).
+- Plyr player version had an "_classCallCheck is not defiend" reference error in the Plyr.mjs file. So I googled a littlebit and found this commented issue on more pages, e.q.: [link to Plyr GitHub](https://github.com/sampotts/plyr/issues/1872)
+After upgrading how it was mentioned in the issue page of GitHub Plyr Repo to version 3.6.2, sadly the error was still persistent. So I just commented out the _classCallCheck function call in the Plyr source code and after it worked everything fine. I am not sure what exactly the reason of this error is, but maybe the template rendered video tag has a delay by the object referencing and the Plyr API script skipping it before by the condition check.
 
-- Include the app CSS stylesheet in your template(s) so you have a central entrypoint for styling the site.
+### Bootstrap 4 Grid
 
-- Then include Bootstrap in your stylesheet so you can use the Bootstrap classes for styling. For this you need to change the configuration of the symfony app to make use of SASS instead of plain CSS (see https://symfony.com/doc/current/frontend/encore/simple-example.html). 
-
-- Change the provided templates to show a list of videos on the homepage (a textual link is ok). Each video should be linked to a detail page of a video that includes the Plyr video player to show the video. Also output the video title that is provided in the "videos" variable. (All data are hardcoded in the controllers so the app doesn't need a databases but usually you don't need to bother).
-
-- The video files are provided in the directory "public/videofiles" and can be accessed in HTML through the path "/videofiles/...". 
-
-- The JS and CSS files of the Plyr video player can be found in "public/static/" and referenced with "/static". Check the Plyr documentation for more info on how to initialize the video player.
-
-- Create a three column layout with Bootstrap 4 grid that contains the player in the middle column on the desktop. On a mobile phone the player should extend over the whole width.
-
-- Create an account in Github (if you don't have one) and create a new repository for your app. Configure the repository as a remote origin in your local directory and push your solution to the Github repo. 
-
-- Please send us the link to the solution and a short documentation about what you did to achieve the goal and what where your experiences. Don't be afraid to talk about problems your encountered (we all do in our daily work). 
-
-
+I used for the grid layout and for styling the elements the build-in Bootstrap grid mixins. This is fortunately from Bootstrap version 4 available. So is less SCSS regarding media queries and could be used the own element class namings without to override the Bootstrap "col-" classes.

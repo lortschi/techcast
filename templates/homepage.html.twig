@@ -1,3 +1,18 @@
-<h1>These are our latest videos</h1>
-
+{% extends "base.html.twig" %}
+{% block body %}
+    <div class="homepage-container">
+        <div class="homepage-row">
+            <div class="homepage-main">
+                <h1>These are our latest videos</h1>
+                <ul>
+                    {% for key, video in videos %}
+                        <li>{{loop.index}}.&nbsp<a href="{{path('videos', {video: key})}}">{{ video.name }} (file: {{ video.file }})</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}
 {# here you can use the Twig variable 'videos' that gets passed from the controller #}
+
+

@@ -1,0 +1,89 @@
+@import './mixins.scss';
+
+html, body {
+    padding: 0;
+    margin: 0;
+    background: whitesmoke;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+.homepage-container, .video-container {
+    @include make-container();
+    width: 100%;
+    margin-top: 30px;
+    text-align: center;
+}
+
+ul {
+    margin: 20px 0;
+    list-style-type: none;
+
+    li {
+        margin: 10px 0;
+    }
+
+    a {
+        color: #000;
+        &:hover {
+            color: #ffa500;
+            text-decoration: none;
+        }
+    }
+}
+
+.homepage-row, .video-row {
+    @include make-row();
+    justify-content: center;
+}
+  
+.homepage-main, .video-main {
+    @include media-breakpoint-up(xs) {
+        @include make-col(12);
+
+        h1 {
+            font-size: 20px;
+        }
+    }
+
+    @include media-breakpoint-up(sm) {
+        @include make-col(12);
+
+        h1 {
+            font-size: 22px;
+        }
+    }
+
+    @include media-breakpoint-up(md) {
+        @include make-col(12);
+
+        h1 {
+            font-size: 22px;
+        }
+    }
+
+    @include media-breakpoint-up(lg) {
+        @include make-col(8);
+
+        h1 {
+            font-size: 28px;
+        }
+    }
+}
+
+.homepage-main {
+    h1 {
+        padding-left: 30px;
+    }
+}
+
+.plyr {
+    height: auto;
+}
+
+
+
+
+

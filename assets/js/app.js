@@ -6,9 +6,19 @@
  */
 
 // any CSS you import will output into a single css file (app.css in this case)
-import '../css/app.css';
+import 'bootstrap';
+import 'bootstrap/dist/css/bootstrap.css';
+import '../../public/static/plyr/plyr.css';
+import '../scss/app.scss';
+import Plyr from '../../public/static/plyr/plyr';
 
 // Need jQuery? Install it with "yarn add jquery", then uncomment to import it.
 // import $ from 'jquery';
 
-console.log('Hello Webpack Encore! Edit me in assets/js/app.js');
+// trigger js after the dom is completelly lodaded
+document.addEventListener('DOMContentLoaded', () => { 
+    const playerElement = document.getElementById('player');
+
+    // instantiate the Plyr player object
+    new Plyr(playerElement);
+});
